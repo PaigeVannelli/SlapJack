@@ -42,6 +42,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-bottom: 6em;
 }
 
 /* ~~~~~~~~~~~~ CARDS ~~~~~~~~~~~ */
@@ -50,8 +51,15 @@ header {
   height: 15em;
   width: 12em;
   background-color: orange;
+  margin-top: 8em;
 }
 
 .player1-card {
   background-color: pink;
+
+/* ~~~~~~~~~~~ WIN MESSAGES ~~~~~~~~~~~ */
+
+.wins {
+  font-size: 3em;
+  margin-bottom: 6em;
 }
