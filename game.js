@@ -18,15 +18,15 @@ class Game {
     //Deals this.cards aray 50/50 to each player changing their hand property
   }
 
-  checkPlayerTurn() {
+  checkPlayerTurn(this.player) {
     //keep track of players turn using this.player1Turn
   }
 
-  dealCard(player) {
+  dealCard(this.player) {
     // this.player deal card to center pile
   }
 
-  slapCard() {
+  slapCard(this.player) {
     // big if else based on center pile array
     //updates player.wins based on which player slaps
   }
@@ -36,3 +36,5 @@ class Game {
     //starts over shuffle deck and deal cards method
   }
 }
+
+//Data model should be an array of every deck ex. blue-07, "red-07.png"

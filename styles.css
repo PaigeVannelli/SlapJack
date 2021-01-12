@@ -1,0 +1,57 @@
+/* ~~~~~~~~~STYLES ON ALL~~~~~~~~ */
+
+* {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+}
+
+body {
+  background-color: #0099cc;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ~~~~~~~~~~~ SECTIONS ~~~~~~~~ */
+
+header {
+ display: flex;
+ align-items: center;
+ /* text-align: center; */
+}
+
+.header-message {
+  /* align-items: center; */
+  /* align-self: center */
+  margin-left: 200px;
+  padding: 3em;
+}
+
+.all-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.wins-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* ~~~~~~~~~~~~ CARDS ~~~~~~~~~~~ */
+
+.card {
+  height: 15em;
+  width: 12em;
+  background-color: orange;
+}
+
+.player1-card {
+  background-color: pink;
+}

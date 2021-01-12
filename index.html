@@ -7,13 +7,22 @@
     <title>SlapJack</title>
   </head>
   <body>
-    <h1 class="win-message">TYPE OF WIN! Player X takes the pile!</h1>
-    <article class="card player1-card"><article>
-    <p class="wins">0 wins</p>
-    <article class="card center-card"><article>
-    <article class="card player2-card"><article>
-      <p class="wins">0 wins</p>
-    <article class="player-deck">
+    <div class="layout">
+      <header>
+        <div class="header-message">
+          <h1 class="win-message">TYPE OF WIN! Player X takes the pile!</h1>
+        </div>
+      </header>
+      <div class="all-cards">
+        <article class="card player1-card"></article>
+        <article class="card center-card"></article>
+        <article class="card player2-card"></article>
+      </div>
+      <div class="wins-section">
+        <p class="wins">0 wins</p>
+        <p class="wins">0 wins</p>
+      </div>
+    </div>
     <script src="./player.js"></script>
     <script src="./game.js"></script>
     <script src="./main.js"></script>
