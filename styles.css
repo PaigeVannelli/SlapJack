@@ -6,7 +6,7 @@
   font-weight: lighter;
   margin: 0;
   padding: 0;
-  border: 1px solid red;
+  /* border: 1px solid red;  */
 }
 
 body {
@@ -92,7 +92,7 @@ header {
 
 .wins {
   font-size: 1.7em;
-  margin-bottom: 6em;
+  margin: .5em 0 6em 0;
 }
 
 .player1-wins {

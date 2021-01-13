@@ -2,12 +2,27 @@ class Game {
   constructor() {
     this.player1 = new Player;
     this.player2 = new Player;
-    this.cards = [];
+    this.cards = cards.slice(0, 52);
+    this.shuffledDeck = []
     this.centerPile = [];
-    // player1Turn = true;
+    this.player1Turn = true;
   }
-  shuffleDeck() {
-    // Takes this.cards and reorgs it
+
+  shuffle() {
+    // var shuffledDeck = []
+    var cardLength = this.cards.length
+    while (cardLength) {
+      var randomIndex = Math.floor(Math.random() * cardLength--);
+      //getting a random index number based on array length
+      var lastCard = this.cards[cardLength];
+      //getting the 52nd card in the array
+      this.cards[cardLength] = this.cards[randomIndex];
+      // last element in the deck is now in a random spot
+      this.cards[randomIndex] = lastCard;
+      //placeholder is our last card in the array
+    }
+    this.shuffledDeck = this.cards;
+    // return shuffledDeck
   }
 
   addToCenter() {
@@ -16,18 +31,27 @@ class Game {
 
   deal() {
     //Deals this.cards aray 50/50 to each player changing their hand property
+    this.player1.hand = this.shuffledDeck.splice(0, 26)
+    this.player2.hand = this.shuffledDeck.splice(0, 26)
   }
 
-  checkPlayerTurn(this.player) {
+  checkPlayerTurn() {
     //keep track of players turn using this.player1Turn
   }
 
-  dealCard(this.player) {
+  playCard() {
     // this.player deal card to center pile
   }
 
-  slapCard(this.player) {
+  slapCard() {
     // big if else based on center pile array
+    //if card number === next card number - interpolate? Or rename?
+    // ["blue-01", "red-01"] - should I make these an object??
+    //iterate through the string and check the last two numbers ===
+    //if those things match (HOW??) make slapable = true
+    // if it's true and someone slaps
+    // else continue game
+    //if it's not true fine player a card
     //updates player.wins based on which player slaps
   }
 
