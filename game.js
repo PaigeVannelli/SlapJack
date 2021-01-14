@@ -25,14 +25,15 @@ class Game {
     // return shuffledDeck
   }
 
-  addToCenter() {
-    //Takes a card and pushes to centerPile array
-  }
-
   deal() {
     //Deals this.cards aray 50/50 to each player changing their hand property
     this.player1.hand = this.shuffledDeck.splice(0, 26)
     this.player2.hand = this.shuffledDeck.splice(0, 26)
+  }
+
+  addToCenter(player) {
+    this.centerPile.push(player.hand[0]);
+    player.hand.shift();
   }
 
   checkPlayerTurn() {
