@@ -70,26 +70,43 @@ class Game {
   slapCard(player) {
     if (this.centerPile[0].includes("jack")) {
       console.log("Jack")
-      winPile(player)
+      this.winPile(player)
     } else if (this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
       console.log("Double")
+      this.winPile(player)
     } else if (this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
       console.log("Sandwich")
+      this.winPile(player)
     } else {
       console.log("bad slap")
+      this.losePile(player)
     }
   }
 
   winPile(player) {
-    // if (player)
-    // if it's player one
-    //take center pile
-    //shuffle
-    //add to end of players hand array
+    var wonCards = this.shuffle(this.centerPile)
+    for (var i = 0; i < wonCards.length; i++) {
+      if (player === this.player1) {
+        this.player1.hand.push(wonCards[i])
+      } else if (player === this.player2) {
+        this.player2.hand.push(wonCards[i])
+      }
+    }
+    this.centerPile = [];
+    console.log(this.player1.hand, this.player2.hand)
   }
 
-  losePile() {
-
+  losePile(player) {
+    var wonCards = this.shuffle(this.centerPile)
+    for (var i = 0; i < wonCards.length; i++) {
+      if (player === this.player1) {
+        this.player2.hand.push(wonCards[i])
+      } else if (player === this.player2) {
+        this.player1.hand.push(wonCards[i])
+      }
+    }
+    this.centerPile = [];
+    console.log(this.player1.hand, this.player2.hand)
   }
 
   reset() {
