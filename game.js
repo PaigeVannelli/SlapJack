@@ -1,7 +1,7 @@
 class Game {
   constructor() {
-    this.player1 = new Player;
-    this.player2 = new Player;
+    this.player1 = new Player(1);
+    this.player2 = new Player(2);
     this.cards = cards.slice(0, 52);
     this.shuffledDeck = []
     this.centerPile = [];
@@ -54,14 +54,30 @@ class Game {
   }
 
   addToCenter(player) {
+    if (this.player1.hand.length > 0 && this.player2.hand.length > 0) {
     // console.log(this.player1, this.player2)
-    player.playCard(player)
-    if (player === this.player1) {
+      if (player === this.player1) {
+        this.player1.playCard(player)
+        this.player1Turn = false;
+      } else {
+        this.player2.playCard(player)
+        this.player1Turn = true;
+      }
+      console.log("centerPile", this.centerPile, "player 1 hand", this.player2.hand)
+    } else if (this.player1.hand.length === 0) {
       this.player1Turn = false;
-    } else {
+      console.log("player 1 truth", this.player1Turn, "player 2 hand", this.player2.hand)
+      this.player2.playCard(player)
+    } else if (this.player2.hand.length === 0) {
       this.player1Turn = true;
+      console.log("player 1 truth", this.player1Turn, "player 1 hand", this.player1.hand, "center pile", this.centerPile)
+      this.player1.playCard(player)
     }
-    console.log(this.centerPile)
+    // } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0) {
+    //   this.shuffledDeck = this.shuffle(this.centerPile)
+    //   this.deal();
+    //   console.log(this.player1.hand)
+    // }
   }
 
   // playCard() {

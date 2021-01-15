@@ -1,17 +1,24 @@
 class Player {
-  constructor() {
-    this.id = Date.now();
+  constructor(id) {
+    this.id = id;
     this.wins = 0;
     this.hand = [];
-    // this.isTurn = null;
+
   }
   playCard(player) {
-    // console.log(player)
+
+    //IF THE PLAYERS ARRAY IS ZERO WRITE LOGIC FOR TRUE FALSE UNCHAINGING
+    // console.log(player.hand.length)
     if (this.hand.length > 0) {
       game.centerPile.unshift(this.hand[0]);
       this.hand.shift();
     } else if (this.hand.length === 0) {
-      this.isTurn = false;
+      if (player.id === 1) {
+        game.player1Turn = false;
+      } else if (player.id === 2) {
+        game.player1Turn = true;
+      }
+      // console.log("test", player.id)
     }
   }
   saveWinsToStorage() {
