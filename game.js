@@ -41,7 +41,6 @@ class Game {
 
   addToCenter(player) {
     if (this.player1.hand.length > 0 && this.player2.hand.length > 0) {
-    // console.log(this.player1, this.player2)
       if (player === this.player1) {
         this.player1.playCard()
         this.player1Turn = false;
@@ -49,17 +48,17 @@ class Game {
         this.player2.playCard()
         this.player1Turn = true;
       }
-      console.log("centerPile", this.centerPile, "player 1 hand", this.player1.hand)
+      console.log("centerPile", this.centerPile, "player 2 hand", this.player2.hand)
     } else if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
       this.player1Turn = false;
       this.player2.playCard()
-      this.endGame = true
-      console.log("failed on first", this.centerPile)
+      this.endGame = 'player1'
+      // console.log("failed on first", this.centerPile)
     } else if (this.player2.hand.length === 0 && this.player1.hand.length > 0) {
       this.player1Turn = true;
       this.player1.playCard()
-      this.endGame = true
-      console.log("failed on second", this.centerPile)
+      this.endGame = 'player2'
+      console.log(this.centerPile)
     } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0) {
       // this.shuffledDeck = this.shuffle(this.centerPile)
       // this.deal();
@@ -87,25 +86,59 @@ class Game {
         console.log("bad slap")
         this.losePile(player)
       }
-    } else if (this.endGame) {
-      console.log("endGame", this.endGame)
-      console.log("includes jack", this.centerPile[0].includes("jack"), this.centerPile.length > 0)
+    } else if (this.endGame === "player1") {
+      // console.log("endGame", this.endGame)
+      // console.log("includes jack", this.centerPile[0].includes("jack"), this.centerPile.length > 0)
       if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
         console.log("Jack")
-        // this.winPile(this.player1)
+        if (player === this.player1) {
+          this.winPile(this.player1)
+          this.endGame = false
+        } else if (player === this.player2) {
+          console.log("player 2 wins!")
+        }
       } else {
         console.log("bad slap")
-        // this.losePile(this.player1)
+        if (player === this.player1) {
+          console.log("player 2 wins")
+          // this.endGame = false
+          // Reset the deck
+        } else if (player === this.player2) {
+          this.winPile(this.player1);
+          this.endGame = false
+        }
       }
-    // } else if (this.endGame === "player2") {
-    //   console.log("endGame2", this.endGame)
-    //   if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
-    //     console.log("Jack")
-    //     // this.winPile(this.player2)
-    //   } else {
-    //     console.log("bad slap")
-    //     // this.losePile(this.player2)
-    //   }
+    } else if (this.endGame === "player2") {
+      console.log("endGame2", this.endGame)
+      if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
+        console.log("Jack")
+        if (player === this.player2) {
+          this.winPile(this.player2)
+          this.endGame = false
+        } else if (player === this.player1) {
+          console.log("player 1 wins!")
+        }
+      } else {
+        console.log("bad slap")
+        if (player === this.player2) {
+          console.log("player 1 wins")
+          // this.endGame = false
+          // Reset the deck
+        } else if (player === this.player1) {
+          this.winPile(this.player2);
+          this.endGame = false
+        }
+      }
+
+    //We want only to check for jacks
+    //if there is a jack we need to figure out which player slapped it
+    // We are passing in which player slapped in our event listener
+    //if it's the loser they winCards()
+    //if it's the winner the game ends and they win a point
+
+    //if no jack is slapped and the winners array hits 0
+    //the winner then winsCards, end game is still going and they keep playing
+
     }
   }
 
