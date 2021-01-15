@@ -24,7 +24,6 @@ function playCard(event) {
 function slapCard()  {
   if (event.key === "f") {
     game.slapCard(game.player1);
-    // game.winPile(game.player1)
   } else if (event.key === "j") {
     game.slapCard(game.player2)
   }

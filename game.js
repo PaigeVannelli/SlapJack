@@ -54,7 +54,8 @@ class Game {
   }
 
   addToCenter(player) {
-    player.playCard()
+    // console.log(this.player1, this.player2)
+    player.playCard(player)
     if (player === this.player1) {
       this.player1Turn = false;
     } else {
