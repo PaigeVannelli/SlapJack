@@ -13,20 +13,33 @@ class Game {
   //   this.deal();
   // }
 
-  shuffle() {
+  shuffle(cards) {
     // var shuffledDeck = []
-    var cardLength = this.cards.length
+    var cardLength = cards.length
     while (cardLength) {
       var randomIndex = Math.floor(Math.random() * cardLength--);
       //getting a random index number based on array length
-      var lastCard = this.cards[cardLength];
+      var lastCard = cards[cardLength];
       //getting the 52nd card in the array
-      this.cards[cardLength] = this.cards[randomIndex];
+      cards[cardLength] = cards[randomIndex];
       // last element in the deck is now in a random spot
-      this.cards[randomIndex] = lastCard;
+      cards[randomIndex] = lastCard;
       //placeholder is our last card in the array
     }
-    this.shuffledDeck = this.cards;
+    return cards
+    // this.shuffledDeck = this.cards;
+    // var cardLength = this.cards.length
+    // while (cardLength) {
+    //   var randomIndex = Math.floor(Math.random() * cardLength--);
+    //   //getting a random index number based on array length
+    //   var lastCard = this.cards[cardLength];
+    //   //getting the 52nd card in the array
+    //   this.cards[cardLength] = this.cards[randomIndex];
+    //   // last element in the deck is now in a random spot
+    //   this.cards[randomIndex] = lastCard;
+    //   //placeholder is our last card in the array
+    // }
+    // this.shuffledDeck = this.cards;
     // return shuffledDeck
   }
 
@@ -41,11 +54,10 @@ class Game {
   }
 
   addToCenter(player) {
+    player.playCard()
     if (player === this.player1) {
-      this.player1.playCard()
       this.player1Turn = false;
     } else {
-      this.player2.playCard()
       this.player1Turn = true;
     }
     console.log(this.centerPile)
@@ -55,14 +67,29 @@ class Game {
   //   // this.player deal card to center pile
   // }
 
-  slapCard() {
+  slapCard(player) {
     if (this.centerPile[0].includes("jack")) {
       console.log("Jack")
+      winPile(player)
     } else if (this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
       console.log("Double")
     } else if (this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
       console.log("Sandwich")
+    } else {
+      console.log("bad slap")
     }
+  }
+
+  winPile(player) {
+    // if (player)
+    // if it's player one
+    //take center pile
+    //shuffle
+    //add to end of players hand array
+  }
+
+  losePile() {
+
   }
 
   reset() {

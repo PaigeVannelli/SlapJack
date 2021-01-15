@@ -9,7 +9,7 @@ window.addEventListener("keydown", slapCard)
 var game = new Game
 
 function setUpGame() {
-  game.shuffle();
+  game.shuffledDeck = game.shuffle(game.cards);
   game.deal();
 }
 
@@ -23,8 +23,8 @@ function playCard(event) {
 
 function slapCard()  {
   if (event.key === "f") {
-    game.slapCard();
+    game.slapCard(player1);
   } else if (event.key === "j") {
-    game.slapCard()
+    game.slapCard(player2)
   }
 }
