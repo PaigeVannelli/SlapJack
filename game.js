@@ -48,6 +48,7 @@ class Game {
       this.player2.playCard()
       this.player1Turn = true;
     }
+    console.log(this.centerPile)
   }
 
   // playCard() {
@@ -56,11 +57,11 @@ class Game {
 
   slapCard() {
     if (this.centerPile[0].includes("jack")) {
-      return "Jack"
+      console.log("Jack")
     } else if (this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
-      return "Double"
+      console.log("Double")
     } else if (this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
-      return "Sandwich"
+      console.log("Sandwich")
     }
   }
 

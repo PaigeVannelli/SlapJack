@@ -21,4 +21,10 @@ function playCard(event) {
   }
 }
 
-function slap
+function slapCard()  {
+  if (event.key === "f") {
+    game.slapCard();
+  } else if (event.key === "j") {
+    game.slapCard()
+  }
+}
