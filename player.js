@@ -5,8 +5,8 @@ class Player {
     this.hand = [];
   }
   playCard() {
-    //This should take a card from the players deck (as given by our game deal method)
-    //shoudl pull the top card out of the array and push it into game.centerPile in the game
+    game.centerPile.unshift(this.hand[0]);
+    this.hand.shift();
   }
   saveWinsToStorage() {
     //This should take this.wins and save to local storage

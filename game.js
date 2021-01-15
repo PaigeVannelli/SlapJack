@@ -8,10 +8,10 @@ class Game {
     this.player1Turn = true;
   }
 
-  setUp() {
-    this.shuffle();
-    this.deal();
-  }
+  // setUp() {
+  //   this.shuffle();
+  //   this.deal();
+  // }
 
   shuffle() {
     // var shuffledDeck = []
@@ -37,21 +37,15 @@ class Game {
   }
 
   checkPlayerTurn() {
-    if (this.player1Turn) {
-      this.addToCenter(this.player1);
-    } else {
-      this.addToCenter(this.player2);
-    }
+    return this.player1Turn;
   }
 
   addToCenter(player) {
-    // this.shuffle()
-    // this.deal()
-    this.centerPile.unshift(player.hand[0]);
-    player.hand.shift();
     if (player === this.player1) {
+      this.player1.playCard()
       this.player1Turn = false;
     } else {
+      this.player2.playCard()
       this.player1Turn = true;
     }
   }
