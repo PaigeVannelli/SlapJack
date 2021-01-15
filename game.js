@@ -63,21 +63,20 @@ class Game {
         this.player2.playCard(player)
         this.player1Turn = true;
       }
-      console.log("centerPile", this.centerPile, "player 1 hand", this.player2.hand)
-    } else if (this.player1.hand.length === 0) {
+      // console.log("centerPile", this.centerPile, "player 1 hand", this.player2.hand)
+    } else if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
       this.player1Turn = false;
-      console.log("player 1 truth", this.player1Turn, "player 2 hand", this.player2.hand)
+      // console.log("failed on first", this.player1Turn )
       this.player2.playCard(player)
-    } else if (this.player2.hand.length === 0) {
+    } else if (this.player2.hand.length === 0 && this.player1.hand.length > 0) {
       this.player1Turn = true;
-      console.log("player 1 truth", this.player1Turn, "player 1 hand", this.player1.hand, "center pile", this.centerPile)
+      // console.log("failed on second", this.player1Turn)
       this.player1.playCard(player)
+    } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0) {
+      this.shuffledDeck = this.shuffle(this.centerPile)
+      this.deal();
+      // console.log(this.player1.hand)
     }
-    // } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0) {
-    //   this.shuffledDeck = this.shuffle(this.centerPile)
-    //   this.deal();
-    //   console.log(this.player1.hand)
-    // }
   }
 
   // playCard() {
