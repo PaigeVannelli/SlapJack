@@ -68,13 +68,13 @@ class Game {
   // }
 
   slapCard(player) {
-    if (this.centerPile[0].includes("jack")) {
+    if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
       console.log("Jack")
       this.winPile(player)
-    } else if (this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
+    } else if (this.centerPile.length > 1 && this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
       console.log("Double")
       this.winPile(player)
-    } else if (this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
+    } else if (this.centerPile.length > 2 && this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
       console.log("Sandwich")
       this.winPile(player)
     } else {
