@@ -31,13 +31,22 @@ class Game {
     this.player2.hand = this.shuffledDeck.splice(0, 26)
   }
 
+  checkPlayerTurn() {
+    if (this.player1Turn) {
+      this.addToCenter(this.player1);
+    } else {
+      this.addToCenter(this.player2);
+    }
+  }
+
   addToCenter(player) {
     this.centerPile.push(player.hand[0]);
     player.hand.shift();
-  }
-
-  checkPlayerTurn() {
-    //keep track of players turn using this.player1Turn
+    if (player === this.player1) {
+      this.player1Turn = false;
+    } else {
+      this.player1Turn = true;
+    }
   }
 
   playCard() {
