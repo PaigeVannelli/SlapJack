@@ -61,16 +61,12 @@ class Game {
   // }
 
   slapCard() {
-    //Legal slaps:
-    // 1. Jack on top
-    // 2. when player slaps a double
-    // 3. Sandwich ie 0 and 2 are same number
-    // 4. if none it's added to oponent
-    // check the center card pile at index 0
-    // if the index.includes("jack")
-    //return success
     if (this.centerPile[0].includes("jack")) {
-      return "yay"
+      return "Jack"
+    } else if (this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
+      return "Double"
+    } else if (this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
+      return "Sandwich"
     }
   }
 
