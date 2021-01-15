@@ -8,6 +8,11 @@ class Game {
     this.player1Turn = true;
   }
 
+  setUp() {
+    this.shuffle();
+    this.deal();
+  }
+
   shuffle() {
     // var shuffledDeck = []
     var cardLength = this.cards.length
@@ -40,7 +45,9 @@ class Game {
   }
 
   addToCenter(player) {
-    this.centerPile.push(player.hand[0]);
+    // this.shuffle()
+    // this.deal()
+    this.centerPile.unshift(player.hand[0]);
     player.hand.shift();
     if (player === this.player1) {
       this.player1Turn = false;
@@ -49,20 +56,22 @@ class Game {
     }
   }
 
-  playCard() {
-    // this.player deal card to center pile
-  }
+  // playCard() {
+  //   // this.player deal card to center pile
+  // }
 
   slapCard() {
-    // big if else based on center pile array
-    //if card number === next card number - interpolate? Or rename?
-    // ["blue-01", "red-01"] - should I make these an object??
-    //iterate through the string and check the last two numbers ===
-    //if those things match (HOW??) make slapable = true
-    // if it's true and someone slaps
-    // else continue game
-    //if it's not true fine player a card
-    //updates player.wins based on which player slaps
+    //Legal slaps:
+    // 1. Jack on top
+    // 2. when player slaps a double
+    // 3. Sandwich ie 0 and 2 are same number
+    // 4. if none it's added to oponent
+    // check the center card pile at index 0
+    // if the index.includes("jack")
+    //return success
+    if (this.centerPile[0].includes("jack")) {
+      return "yay"
+    }
   }
 
   reset() {
@@ -72,3 +81,12 @@ class Game {
 }
 
 //Data model should be an array of every deck ex. blue-07, "red-07.png"
+// big if else based on center pile array
+//if card number === next card number - interpolate? Or rename?
+// ["blue-01", "red-01"] - should I make these an object??
+//iterate through the string and check the last two numbers ===
+//if those things match (HOW??) make slapable = true
+// if it's true and someone slaps
+// else continue game
+//if it's not true fine player a card
+//updates player.wins based on which player slaps
