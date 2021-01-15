@@ -1,30 +1,27 @@
  // ~~~~~~~~~~~ EVENT LISTENERS~~~~~~~~~ //
  window.addEventListener("load", setUpGame)
 
-window.addEventListener("keydown", playCard)
+window.addEventListener("keydown", playCards)
 
-window.addEventListener("keydown", slapCard)
+// window.addEventListener("keydown", slapCard)
 
 // ~~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~~~~~ //
-var game = new Game
+var currentGame
 
 function setUpGame() {
-  game.shuffledDeck = game.shuffle(game.cards);
-  game.deal();
+  currentGame = new Game()
+  currentGame.shuffledDeck = currentGame.shuffle(currentGame.cards);
+  currentGame.deal();
 }
 
-function playCard(event) {
-  if (event.key === 'q' && game.player1Turn) {
-    game.addToCenter(game.player1)
-  } else if (event.key === 'p' && !game.player1Turn) {
-    game.addToCenter(game.player2)
-  }
-}
-
-function slapCard()  {
-  if (event.key === "f") {
-    game.slapCard(game.player1);
-  } else if (event.key === "j") {
-    game.slapCard(game.player2)
+function playCards(event) {
+  if (event.key === 'q' && currentGame.player1Turn) {
+    currentGame.addToCenter(currentGame.player1)
+  } else if (event.key === 'p' && !currentGame.player1Turn) {
+    currentGame.addToCenter(currentGame.player2)
+  } else if (event.key === 'f') {
+    currentGame.slapCard(currentGame.player1);
+  } else if (event.key === 'j') {
+    currentGame.slapCard(currentGame.player2)
   }
 }

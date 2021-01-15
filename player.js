@@ -5,20 +5,13 @@ class Player {
     this.hand = [];
 
   }
-  playCard(player) {
+  playCard() {
 
     //IF THE PLAYERS ARRAY IS ZERO WRITE LOGIC FOR TRUE FALSE UNCHAINGING
     // console.log(player.hand.length)
     if (this.hand.length > 0) {
-      game.centerPile.unshift(this.hand[0]);
+      currentGame.centerPile.unshift(this.hand[0]);
       this.hand.shift();
-    } else if (this.hand.length === 0) {
-      if (player.id === 1) {
-        game.player1Turn = false;
-      } else if (player.id === 2) {
-        game.player1Turn = true;
-      }
-      // console.log("test", player.id)
     }
   }
   saveWinsToStorage() {
