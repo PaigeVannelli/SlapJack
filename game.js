@@ -114,11 +114,7 @@ class Game {
   winPile(player) {
     var wonCards = this.shuffle(this.centerPile)
     for (var i = 0; i < wonCards.length; i++) {
-      if (player === this.player1) {
-        this.player1.hand.push(wonCards[i])
-      } else if (player === this.player2) {
-        this.player2.hand.push(wonCards[i])
-      }
+      player.hand.push(wonCards[i])
     }
     this.centerPile = [];
     console.log(this.player1.hand, this.player2.hand)
