@@ -1,3 +1,8 @@
+// Refactor
+// 1. clean up conditionals using &&
+// 2. SRP with methods - create helper methods
+
+
 class Game {
   constructor() {
     this.player1 = new Player(1);
@@ -11,13 +16,13 @@ class Game {
   }
 
   shuffle(cards) {
-    var cardLength = cards.length
-    while (cardLength) {
-      var randomIndex = Math.floor(Math.random() * cardLength--);
+    var cardsLength = cards.length
+    while (cardsLength) {
+      var randomIndex = Math.floor(Math.random() * cardsLength--);
       //getting a random index number based on array length
-      var lastCard = cards[cardLength];
+      var lastCard = cards[cardsLength];
       //getting the 52nd card in the array
-      cards[cardLength] = cards[randomIndex];
+      cards[cardsLength] = cards[randomIndex];
       // last element in the deck is now in a random spot
       cards[randomIndex] = lastCard;
       //placeholder is our last card in the array
@@ -26,9 +31,8 @@ class Game {
   }
 
   deal() {
-    //Deals this.cards aray 50/50 to each player changing their hand property
-    this.player1.hand = this.shuffledDeck.splice(0, 26)
-    this.player2.hand = this.shuffledDeck.splice(0, 26)
+    this.player1.hand = this.cards.splice(0, 26)
+    this.player2.hand = this.cards.splice(0, 26)
   }
 
   checkPlayerTurn() {
@@ -37,13 +41,8 @@ class Game {
 
   addToCenter(player) {
     if (this.player1.hand.length > 0 && this.player2.hand.length > 0) {
-      if (player === this.player1) {
-        this.player1.playCard()
-        this.player1Turn = false;
-      } else {
-        this.player2.playCard()
-        this.player1Turn = true;
-      }
+      player.playCard()
+      this.player1Turn = !this.player1Turn
       console.log("centerPile", this.centerPile, "player1 hand", this.player1.hand, "player 2 hand", this.player2.hand)
     } else if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
       this.player1Turn = false;
@@ -55,8 +54,8 @@ class Game {
       this.player1.playCard()
       this.endGame = 'player2'
       console.log(this.centerPile)
-    } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0 && this.centerPile[0].includes("jack")) {
-      if (this.player1Turn === true) {
+    } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0 && !this.centerPile[0].includes("jack")) {
+      if (this.player1Turn) {
         this.winPile(this.player1)
       } else {
         this.winPile(this.player2)

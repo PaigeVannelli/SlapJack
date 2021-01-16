@@ -10,14 +10,14 @@ var currentGame
 
 function setUpGame() {
   currentGame = new Game()
-  currentGame.shuffledDeck = currentGame.shuffle(currentGame.cards);
+  currentGame.shuffle(currentGame.cards);
   currentGame.deal();
 }
 
 function playCards(event) {
-  if (event.key === 'q' && currentGame.player1Turn) {
+  if (event.key === 'q' && currentGame.checkPlayerTurn()) {
     currentGame.addToCenter(currentGame.player1)
-  } else if (event.key === 'p' && !currentGame.player1Turn) {
+  } else if (event.key === 'p' && !currentGame.checkPlayerTurn()) {
     currentGame.addToCenter(currentGame.player2)
   } else if (event.key === 'f') {
     currentGame.slapCard(currentGame.player1);
