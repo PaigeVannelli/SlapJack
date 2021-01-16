@@ -101,12 +101,12 @@ class Game {
           this.winPile(currentLoser)
           this.endGame = false
         } else if (player === currentWinner) {
-          console.log(`winner wins`)
+          currentWinner.wins++
         }
       } else {
         console.log("bad slap test", player)
         if (player === currentLoser) {
-          console.log(`winner wins`)
+          currentWinner.wins++
         } else if (player === currentWinner) {
           this.winPile(currentLoser);
           this.endGame = false
