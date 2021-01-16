@@ -90,7 +90,7 @@ class Game {
      this.winPile(player)
    } else {
      console.log("bad slap")
-     this.losePile(player)
+     this.loseCard(player)
    }
   }
 
@@ -102,11 +102,12 @@ class Game {
           this.endGame = false
         } else if (player === currentWinner) {
           currentWinner.wins++
+          this.reset()
         }
       } else {
-        console.log("bad slap test", player)
         if (player === currentLoser) {
           currentWinner.wins++
+          this.reset()
         } else if (player === currentWinner) {
           this.winPile(currentLoser);
           this.endGame = false
@@ -128,20 +129,22 @@ class Game {
     console.log(this.player1.hand, this.player2.hand)
   }
 
-  losePile(player) {
-    var wonCards = this.shuffle(this.centerPile)
-    for (var i = 0; i < wonCards.length; i++) {
-      if (player === this.player1) {
-        this.player2.hand.push(wonCards[i])
-      } else if (player === this.player2) {
-        this.player1.hand.push(wonCards[i])
-      }
+  loseCard(player) {
+    if (player === this.player1) {
+      this.player2.hand.push(player.hand[0])
+    } else if (player === this.player2) {
+      this.player1.hand.push(player.hand[0])
     }
-    this.centerPile = [];
+    player.hand.shift()
     console.log(this.player1.hand, this.player2.hand)
   }
 
   reset() {
+    this.shuffledDeck.push(this.player1.hand)
+    this.shuffledDeck.push(this.player2.hand)
+    this.shuffledDeck.push(this.centerPile)
+    this.shuffle(this.shuffledDeck);
+    this.deal()
     //Reset the deck once player.cards is empty
     //starts over shuffle deck and deal cards method
   }
