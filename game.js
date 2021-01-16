@@ -11,6 +11,7 @@ class Game {
     this.shuffledDeck = []
     this.centerPile = [];
     this.player1Turn = true;
+    this.message = ""
     this.endGame = false;
     this.gameOver = false;
   }
@@ -43,17 +44,17 @@ class Game {
     if (this.player1.hand.length > 0 && this.player2.hand.length > 0) {
       player.playCard()
       this.player1Turn = !this.player1Turn
-      console.log("centerPile", this.centerPile, "player1 hand", this.player1.hand, "player 2 hand", this.player2.hand)
+      // console.log("centerPile", this.centerPile, "player1 hand", this.player1.hand, "player 2 hand", this.player2.hand)
     } else if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
       this.player1Turn = false;
       this.player2.playCard()
       this.endGame = 'player1'
-      console.log(this.centerPile)
+      // console.log(this.centerPile)
     } else if (this.player2.hand.length === 0 && this.player1.hand.length > 0) {
       this.player1Turn = true;
       this.player1.playCard()
       this.endGame = 'player2'
-      console.log(this.centerPile)
+      // console.log(this.centerPile)
     } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0 && !this.centerPile[0].includes("jack")) {
       if (this.player1Turn) {
         this.winPile(this.player1)
@@ -77,15 +78,19 @@ class Game {
    if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
      console.log("Jack")
      this.winPile(player)
+     this.message = "JACK"
    } else if (this.centerPile.length > 1 && this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
      console.log("Double")
      this.winPile(player)
+     this.message = "DOUBLE"
    } else if (this.centerPile.length > 2 && this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
      console.log("Sandwich")
      this.winPile(player)
+     this.message = "SANDWICH"
    } else {
-     console.log("bad slap")
+     console.log("Bad Slap")
      this.loseCard(player)
+     this.message = "BAD SLAP"
    }
   }
 
@@ -117,7 +122,7 @@ class Game {
       player.hand.push(wonCards[i])
     }
     this.centerPile = [];
-    console.log(this.player1.hand, this.player2.hand)
+    // console.log(this.player1.hand, this.player2.hand)
   }
 
   loseCard(player) {
@@ -127,7 +132,7 @@ class Game {
       this.player1.hand.push(player.hand[0])
     }
     player.hand.shift()
-    console.log(this.player1.hand, this.player2.hand)
+    // console.log(this.player1.hand, this.player2.hand)
   }
 
   reset() {
