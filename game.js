@@ -48,90 +48,32 @@ class Game {
         this.player2.playCard()
         this.player1Turn = true;
       }
-      console.log("centerPile", this.centerPile, "player 2 hand", this.player2.hand)
+      console.log("centerPile", this.centerPile, "player1 hand", this.player1.hand, "player 2 hand", this.player2.hand)
     } else if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
       this.player1Turn = false;
       this.player2.playCard()
       this.endGame = 'player1'
-      // console.log("failed on first", this.centerPile)
+      console.log(this.centerPile)
     } else if (this.player2.hand.length === 0 && this.player1.hand.length > 0) {
       this.player1Turn = true;
       this.player1.playCard()
       this.endGame = 'player2'
       console.log(this.centerPile)
-    } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0) {
-      // this.shuffledDeck = this.shuffle(this.centerPile)
-      // this.deal();
-      // I need to see who plays the last card becuase they should get the pile
-      // use the win pile function on the right player?
+    } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0 && this.centerPile[0].includes("jack")) {
+      if (this.player1Turn === true) {
+        this.winPile(this.player1)
+      } else {
+        this.winPile(this.player2)
+      }
     }
   }
-
-  // playCard() {
-  //   // this.player deal card to center pile
-  // }
 
   slapCard(player) {
     if (!this.endGame) {
       this.normalPlay(player)
     } else if (this.endGame === "player1") {
-      // if (this.player2.hand.length > 0) {
-      //   if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
-      //     console.log("Jack")
-      //     if (player === this.player1) {
-      //       this.winPile(this.player1)
-      //       this.endGame = false
-      //     } else if (player === this.player2) {
-      //       console.log("player 2 wins!")
-      //     }
-      //   } else {
-      //     console.log("bad slap")
-      //     if (player === this.player1) {
-      //       console.log("player 2 wins")
-      //       // this.endGame = false
-      //       // Reset the deck
-      //     } else if (player === this.player2) {
-      //       this.winPile(this.player1);
-      //       this.endGame = false
-      //     }
-      //   }
-      // } else if (this.player2.hand.length === 0) {
-      //   console.log("player 2 out of cards", this.centerPile)
-      //   this.player2.hand.push(this.centerPile.shuffle())
-      //   console.log("after shuffle", this.centerPile)
-      // }
       this.endGamePlay(player, this.player1, this.player2);
-
     } else if (this.endGame === "player2") {
-      // if (this.player1.hand.length > 0) {
-      //   console.log("endGame2", this.endGame)
-      //   if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
-      //     console.log("Jack")
-      //     if (player === this.player2) {
-      //       this.winPile(this.player2)
-      //       this.endGame = false
-      //     } else if (player === this.player1) {
-      //       console.log("player 1 wins!")
-      //     }
-      //   } else {
-      //     console.log("bad slap")
-      //     if (player === this.player2) {
-      //       console.log("player 1 wins")
-      //       // this.endGame = false
-      //       // Reset the deck
-      //     } else if (player === this.player1) {
-      //       this.winPile(this.player2);
-      //       this.endGame = false
-      //     }
-      //   }
-      // //   else if ()
-      // // //if no jack is slapped and the winners array hits 0
-      // // //the winner then winsCards, end game is still going and they keep playing
-      // } else {
-      //   console.log("player 1 out of cards", this.centerPile)
-      //   this.player1.hand.push(this.centerPile.shuffle())
-      //   console.log("after shuffle", this.centerPile)
-      // }
       this.endGamePlay(player, this.player2, this.player1);
     }
   }
@@ -155,33 +97,23 @@ class Game {
   endGamePlay(player, currentLoser, currentWinner) {
     if (currentWinner.hand.length > 0) {
       if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
-        // console.log("Jack")
         if (player === currentLoser) {
           this.winPile(currentLoser)
           this.endGame = false
-          console.log(`${currentLoser} gets the cards`, currentLoser.hand)
         } else if (player === currentWinner) {
-          console.log(`${currentWinner} wins`)
+          console.log(`winner wins`)
         }
       } else {
-        console.log("bad slap")
-        if (player === this.currentLoser) {
-          console.log(`${currentWinner} wins`)
-          // this.endGame = false
-          // Reset the deck
-        } else if (player === this.currentWinner) {
-          this.winPile(this.currentLoser);
+        console.log("bad slap test", player)
+        if (player === currentLoser) {
+          console.log(`winner wins`)
+        } else if (player === currentWinner) {
+          this.winPile(currentLoser);
           this.endGame = false
         }
       }
     }
   }
-  // if (this.player1.hand.length === 0)
-  //We want only to check for jacks
-  //if there is a jack we need to figure out which player slapped it
-  // We are passing in which player slapped in our event listener
-  //if it's the loser they winCards()
-  //if it's the winner the game ends and they win a point
 
   winPile(player) {
     var wonCards = this.shuffle(this.centerPile)
