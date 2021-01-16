@@ -7,12 +7,8 @@ class Game {
     this.centerPile = [];
     this.player1Turn = true;
     this.endGame = false;
+    this.gameOver = false;
   }
-
-  // setUp() {
-  //   this.shuffle();
-  //   this.deal();
-  // }
 
   shuffle(cards) {
     var cardLength = cards.length
@@ -140,12 +136,6 @@ class Game {
   }
 
   reset() {
-    this.shuffledDeck.push(this.player1.hand)
-    this.shuffledDeck.push(this.player2.hand)
-    this.shuffledDeck.push(this.centerPile)
-    this.shuffle(this.shuffledDeck);
-    this.deal()
-    //Reset the deck once player.cards is empty
-    //starts over shuffle deck and deal cards method
+    this.gameOver = true;
   }
 }
