@@ -23,5 +23,11 @@ function playCards(event) {
     currentGame.slapCard(currentGame.player1);
   } else if (event.key === 'j') {
     currentGame.slapCard(currentGame.player2)
+  } else if (event.key === 'Enter' && currentGame.gameOver) {
+      setUpGame()
   }
 }
+
+// Check to make sure the gams is starting over properly
+//check that things are reseting on enter? Do you need to add a conditional that game over === false?
+// start DOM display
