@@ -74,22 +74,25 @@ class Game {
    if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
      console.log("Jack")
      this.winPile(player)
-     this.message = "JACK"
+     // this.message = "JACK"
+     this.message = `JACK! ${player.name} takes the pile`
      console.log("player 1 turn", this.player1Turn)
    } else if (this.centerPile.length > 1 && this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
      console.log("Double")
      this.winPile(player)
-     this.message = "DOUBLE"
+     // this.message = "DOUBLE"
+     this.message = `DOUBLE! ${player.name} takes the pile`
      console.log("player 1 turn", this.player1Turn)
    } else if (this.centerPile.length > 2 && this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
      console.log("Sandwich")
      this.winPile(player)
-     this.message = "SANDWICH"
+     // this.message = "SANDWICH"
+     this.message = `SANDWICH! ${player.name} takes the pile`
      console.log("player 1 turn", this.player1Turn)
    } else {
      console.log("Bad Slap")
      this.loseCard(player)
-     this.message = "BAD SLAP"
+     this.message = `BAD SLAP! ${player.name} loses a card.`
      console.log("player 1 turn", this.player1Turn)
    }
   }
@@ -102,13 +105,13 @@ class Game {
           this.endGame = false
         } else if (player === currentWinner) {
           currentWinner.wins++
-          this.message = `Winner winner`
+          this.message = `${currentWinner.name} wins!!`
           this.reset()
         }
       } else {
         if (player === currentLoser) {
           currentWinner.wins++
-          this.message = `winner winner`
+          this.message = `${currentWinner.name} wins!!`
           this.reset()
         } else if (player === currentWinner) {
           this.winPile(currentLoser);
