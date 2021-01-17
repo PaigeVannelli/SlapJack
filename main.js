@@ -68,24 +68,9 @@ function showSlapDisplay(player) {
 }
 
 function clearCenterCard(player) {
-  var winner
-  // winner = (player === currentGame.player1) ? "Player 1" | "Player 2"
-  if (player === currentGame.player1) {
-    winner = "Player 1"
-  } else {
-    winner = "Player 2"
-  }
-  if (currentGame.message === 'JACK' || 'SANDWICH' || 'DOUBLE') {
-    document.getElementById("winMessage").innerText = `${currentGame.message}! ${winner} takes the pile`;
-    document.getElementById("centerCardDisplay").classList.add("invisible")
-    hideMessage()
-  } else if (currentGame.message === `BAD SLAP`) {
-    document.getElementById("winMessage").innerText = `BAD SLAP`;
-    hideMessage()
-  } else {
-    console.log(currentGame.message)
-    // document.getElementById("winMessage").innerText = `${currentGame.message}!`
-  }
+  document.getElementById("winMessage").innerText = currentGame.message;
+  document.getElementById("centerCardDisplay").classList.add("invisible")
+  hideMessage()
 }
 
 function hideMessage() {

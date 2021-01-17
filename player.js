@@ -1,6 +1,7 @@
 class Player {
   constructor(id) {
     this.id = id;
+    this.name = "Player " + id
     this.wins = 0;
     this.hand = [];
 
@@ -11,7 +12,7 @@ class Player {
       this.hand.shift();
     }
   }
-  
+
   saveWinsToStorage() {
     //This should take this.wins and save to local storage
   }
