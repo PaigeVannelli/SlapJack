@@ -9,19 +9,19 @@
   <body>
     <div class="layout">
       <header>
-        <div class="header-message">
-          <h1 class="win-message">TYPE OF WIN! Player X takes the pile!</h1>
-        </div>
+        <!-- <div class="header-message"> -->
+          <h1 class="win-message" id="winMessage"></h1>
+        <!-- </div> -->
       </header>
       <div class="all-cards">
-        <article class="card player-cards player1-card" img=></article>
-        <article class="card center-card"><img class="center-card-image" src="./assets/blue-king.png"></article>
-        <article class="card player-cards player2-card"></article>
+        <article class="card player-cards player1-card" id="player1Cards"></article>
+        <article class="card center-card"><img class="center-card-image" id="centerCardDisplay"></article>
+        <article class="card player-cards player2-card" id="player2Cards"></article>
       </div>
       <div class="wins-section">
-        <p class="wins player1-wins">0 wins</p>
+        <p class="wins player1-wins" id="player1Wins">0 wins</p>
         <p></p>
-        <p class="wins player2-wins">0 wins</p>
+        <p class="wins player2-wins" id="player2Wins">0 wins</p>
       </div>
     </div>
     <script src="./Data.js"></script>
