@@ -15,27 +15,47 @@ function setUpGame() {
 function playCards(event) {
   if (event.key === 'q' && currentGame.checkPlayerTurn()) {
     currentGame.addToCenter(currentGame.player1);
-    displayCenterCard();
+    displayCards();
   } else if (event.key === 'p' && !currentGame.checkPlayerTurn()) {
     currentGame.addToCenter(currentGame.player2);
-    displayCenterCard();
+    displayCards();
   } else if (event.key === 'f') {
     currentGame.slapCard(currentGame.player1);
-    clearCenterCard(currentGame.player1);
-    displayPlayerWins();
+    showSlapDisplay(currentGame.player1)
   } else if (event.key === 'j') {
     currentGame.slapCard(currentGame.player2);
-    clearCenterCard(currentGame.player2);
-    displayPlayerWins();
+    showSlapDisplay(currentGame.player2)
   } else if (event.key === 'Enter' && currentGame.gameOver) {
-      setUpGame();
+    console.log("enter is working ")
+    setUpGame();
+    resetDisplay();
+    console.log(currentGame)
   }
+}
+
+function displayCards() {
+  displayCenterCard();
+  hideEmptyDeck();
 }
 
 function displayCenterCard() {
    var centerCard = document.getElementById("centerCardDisplay")
-   centerCard.classList.remove("invisible")
    centerCard.src = `./assets/${currentGame.centerPile[0]}.png`
+   centerCard.classList.remove("invisible")
+}
+
+function hideEmptyDeck() {
+  if (currentGame.player1.hand.length === 0) {
+    document.getElementById("player1Cards").classList.add("invisible")
+  }
+  if (currentGame.player2.hand.length === 0)
+  document.getElementById("player2Cards").classList.add("invisible")
+}
+
+function showSlapDisplay(player) {
+  clearCenterCard(player);
+  displayPlayerWins();
+  showPlayerDeck()
 }
 
 function clearCenterCard(player) {
@@ -67,14 +87,21 @@ function displayPlayerWins() {
   document.getElementById("player2Wins").innerText = `${currentGame.player2.wins} wins`
 }
 
-// Check to make sure the gams is starting over properly
-//check that things are reseting on enter? Do you need to add a conditional that game over === false?
-// start DOM display
-// 1. update center card
-// 2. update header based on wins and winner
-// 3. update wins below upon win
-//Update Center cards
-// should happen every time a player hit p or q
-//have the display target the top card on the pile and interpolate in the inner html
+function showPlayerDeck() {
+  if (currentGame.player1.hand.length > 0) {
+    document.getElementById("player1Cards").classList.remove("invisible")
+  }
+  if (currentGame.player2.hand.length > 0)
+  document.getElementById("player2Cards").classList.remove("invisible")
+}
 
-// it's not RESETING!
+function resetDisplay() {
+  if (currentGame.centerPile.length === 0) {
+    document.getElementById("centerCardDisplay").classList.add("invisible");
+  }
+  showPlayerDeck();
+}
+
+// BUGS
+// If end game and one player runs out of cards it should show empty cards and then shuffle it
+// Wins aren't saving - I'm reseting game - Can I just use local storage?
