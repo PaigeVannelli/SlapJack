@@ -1,8 +1,3 @@
-// Refactor
-// 1. clean up conditionals using &&
-// 2. SRP with methods - create helper methods
-
-
 class Game {
   constructor() {
     this.player1 = new Player(1);
@@ -107,13 +102,13 @@ class Game {
           this.endGame = false
         } else if (player === currentWinner) {
           currentWinner.wins++
-          this.message = ``
+          this.message = `Winner winner`
           this.reset()
         }
       } else {
         if (player === currentLoser) {
           currentWinner.wins++
-          this.message = ``
+          this.message = `winner winner`
           this.reset()
         } else if (player === currentWinner) {
           this.winPile(currentLoser);
