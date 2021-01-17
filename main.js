@@ -104,6 +104,7 @@ function resetDisplay() {
 }
 
 // BUGS
-// Setup up player X wins! diplay message - none of the messages are diaplying correct
-// Review your conditional! It's not running correctly
 // Wins aren't saving - I'm reseting game - Can I just use local storage?
+// Fix old card flashing on screen after slap
+// Add shadows to cards and change shadow upon plays
+// change color pallet 
