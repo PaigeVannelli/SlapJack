@@ -39,10 +39,12 @@ class Game {
     if (this.endGame === false && this.centerPile.length < 52) {
       player.playCard()
       this.player1Turn = !this.player1Turn
-    } else if (this.endGame = 'player1' && this.centerPile.length < 52) {
+    } else if (this.endGame === 'player1' && this.centerPile.length < 52) {
+      console.log("player 2 can play")
       this.player1Turn = false;
       this.player2.playCard()
-    } else if (this.endGame = 'player2' && this.centerPile.length < 52) {
+    } else if (this.endGame === 'player2' && this.centerPile.length < 52) {
+      console.log("player 1 can play")
       this.player1Turn = true;
       this.player1.playCard()
     } else if (this.centerPile.length === 52) {
