@@ -1,17 +1,20 @@
 /* ~~~~~~~~~STYLES ON ALL~~~~~~~~ */
 
 * {
-  font-family: sans-serif monospace;
+  font-family: monaco monospace;
   color: white;
   font-weight: lighter;
   margin: 0;
   padding: 0;
-  /* border: 1px solid red;  */
 }
 
 body {
-  background-color: #0099cc;
-  height: 100%;
+  background-color: #7395AE;
+  background-image: url("https://www.cssdesignawards.com/articleimages/2014/20140826/13-infiniteCss.jpg");
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBuQOxExxcaMB5VF1pWua96jyd6r1CeFeGUw&usqp=CAU"); */
+  background-repeat: no-repeat;
+  background-size: 95%;
+  background-position: center;
 }
 
 .layout {
@@ -27,13 +30,6 @@ header {
  justify-content: center;
 }
 
-.header-message {
-  align-items: center;
-  align-self: center;
-  text-align: center;
-  font-size: 1.2em;
-}
-
 .win-message {
   display: flex;
   font-size: 3em;
@@ -41,7 +37,8 @@ header {
   align-items: center;
   align-self: center;
   text-align: center;
-  height: 1.1em;
+  height: 1.5em;
+  color: #7395AE;
 }
 
 .all-cards {
@@ -75,15 +72,11 @@ header {
 }
 
 .player1-card {
-  box-shadow: 0 0 20px red;
+  box-shadow: 0 0 20px #7395AE;
 }
 
 .player2-card {
-  box-shadow: 0 0 20px blue;
-}
-
-.center-card {
-
+  box-shadow: 0 0 20px #7395AE;
 }
 
 .center-card-image {
