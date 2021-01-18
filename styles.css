@@ -13,8 +13,8 @@ body {
   background-image: url("https://www.cssdesignawards.com/articleimages/2014/20140826/13-infiniteCss.jpg");
   /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBuQOxExxcaMB5VF1pWua96jyd6r1CeFeGUw&usqp=CAU"); */
   background-repeat: no-repeat;
-  background-size: 95%;
-  background-position: center;
+  background-size: 92%;
+  background-position: 50% -15%;
 }
 
 .layout {
@@ -89,7 +89,7 @@ header {
 
 .wins {
   font-size: 1.7em;
-  margin: .5em 0 6em 0;
+  margin: .5em 0 0 0;
 }
 
 .player1-wins {

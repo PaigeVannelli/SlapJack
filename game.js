@@ -36,28 +36,23 @@ class Game {
   }
 
   addToCenter(player) {
-    if (this.player1.hand.length > 0 && this.player2.hand.length > 0) {
+    if (this.endGame === false && this.centerPile.length < 52) {
       player.playCard()
       this.player1Turn = !this.player1Turn
-      console.log("player 1 turn", this.player1Turn)
-      // console.log("centerPile", this.centerPile, "player1 hand", this.player1.hand, "player 2 hand", this.player2.hand)
-    } else if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
+    } else if (this.endGame = 'player1' && this.centerPile.length < 52) {
       this.player1Turn = false;
       this.player2.playCard()
-      this.endGame = 'player1'
-      console.log("player 1 turn", this.player1Turn)
-    } else if (this.player2.hand.length === 0 && this.player1.hand.length > 0) {
+    } else if (this.endGame = 'player2' && this.centerPile.length < 52) {
       this.player1Turn = true;
       this.player1.playCard()
-      this.endGame = 'player2'
-      console.log("player 1 turn", this.player1Turn)
-    } else if (this.player1.hand.length === 0 && this.player2.hand.length === 0 && !this.centerPile[0].includes("jack")) {
+    } else if (this.centerPile.length === 52) {
       if (this.player1Turn) {
         this.winPile(this.player1)
       } else {
         this.winPile(this.player2)
       }
     }
+    this.checkEndGame();
   }
 
   slapCard(player) {
@@ -72,58 +67,33 @@ class Game {
 
  normalPlay(player) {
    if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
-     console.log("Jack")
      this.winPile(player)
-     // this.message = "JACK"
      this.message = `JACK! ${player.id} takes the pile`
-     console.log("player 1 turn", this.player1Turn)
    } else if (this.centerPile.length > 1 && this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
-     console.log("Double")
      this.winPile(player)
-     // this.message = "DOUBLE"
      this.message = `DOUBLE! ${player.id} takes the pile`
-     console.log("player 1 turn", this.player1Turn)
    } else if (this.centerPile.length > 2 && this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
-     console.log("Sandwich")
      this.winPile(player)
-     // this.message = "SANDWICH"
      this.message = `SANDWICH! ${player.id} takes the pile`
-     console.log("player 1 turn", this.player1Turn)
    } else {
-     console.log("Bad Slap")
      this.loseCard(player)
      this.message = `BAD SLAP! ${player.id} loses a card.`
-     console.log("player 1 turn", this.player1Turn)
    }
   }
 
   endGamePlay(player, currentLoser, currentWinner) {
-    if (currentWinner.hand.length > 0) {
-      if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
-        if (player === currentLoser) {
-          this.winPile(currentLoser)
-          this.message = `BAD SLAP! ${currentLoser.id} takes the pile.`
-          this.endGame = false
-        } else if (player === currentWinner) {
-          currentWinner.wins++;
-          currentWinner.saveWinsToStorage()
-          this.message = `${currentWinner.id} wins!! Press enter for new game`;
-          this.reset();
-        }
-      } else {
-        if (player === currentLoser) {
-          currentWinner.wins++;
-          currentWinner.saveWinsToStorage();
-          this.message = `${currentWinner.id} wins!! Press enter for new game`;
-          this.reset();
-        } else if (player === currentWinner) {
-          this.winPile(currentLoser);
-          this.message = `BAD SLAP! ${currentLoser.id} takes the pile.`
-          this.endGame = false
-        }
+    if (this.centerPile[0].includes("jack")) {
+      if (player === currentLoser) {
+        this.slapBackIn(currentLoser)
+      } else if (player === currentWinner) {
+        this.winGame(currentWinner)
       }
-    } else if (currentWinner.hand.length === 0) {
-      winPile(currentWinner);
+    } else {
+      if (player === currentLoser) {
+        this.winGame(currentWinner)
+      } else if (player === currentWinner) {
+        this.slapBackIn(currentLoser)
+      }
     }
   }
 
@@ -142,6 +112,27 @@ class Game {
       this.player1.hand.push(player.hand[0])
     }
     player.hand.shift()
+  }
+
+  checkEndGame() {
+    if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
+      this.endGame = 'player1';
+    } else if (this.player2.hand.length === 0 && this.player1.hand.length > 0) {
+      this.endGame = 'player2';
+    }
+  }
+
+  slapBackIn(currentLoser) {
+    this.winPile(currentLoser)
+    this.message = `BAD SLAP! ${currentLoser.id} takes the pile.`
+    this.endGame = false
+  }
+
+  winGame(currentWinner) {
+    currentWinner.wins++;
+    currentWinner.saveWinsToStorage();
+    this.message = `${currentWinner.id} wins!! Press enter for new game`;
+    this.reset();
   }
 
   reset() {

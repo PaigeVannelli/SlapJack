@@ -119,3 +119,6 @@ function makeInvisible(element, isInvisible) {
 // Add shadows to cards and change shadow upon plays
 // change color pallet
 // message - press enter to reset
+//bad slap shortly after is dasappearing too fast
+//add timeout to every slap message!
+//the first card being gone at end game isn't updating the slap play
