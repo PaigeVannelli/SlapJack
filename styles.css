@@ -24,16 +24,13 @@ body {
 
 header {
  display: flex;
- align-items: center;
- text-align: center;
+ justify-content: center;
 }
 
 .header-message {
   align-items: center;
   align-self: center;
   text-align: center;
-  /* margin-left: 375px; */
-  /* padding: 3em; */
   font-size: 1.2em;
 }
 
@@ -44,6 +41,7 @@ header {
   align-items: center;
   align-self: center;
   text-align: center;
+  height: 1.1em;
 }
 
 .all-cards {
