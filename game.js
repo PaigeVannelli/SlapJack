@@ -40,11 +40,9 @@ class Game {
       player.playCard()
       this.player1Turn = !this.player1Turn
     } else if (this.endGame === 'player1' && this.centerPile.length < 52) {
-      console.log("player 2 can play")
       this.player1Turn = false;
       this.player2.playCard()
     } else if (this.endGame === 'player2' && this.centerPile.length < 52) {
-      console.log("player 1 can play")
       this.player1Turn = true;
       this.player1.playCard()
     } else if (this.centerPile.length === 52) {
@@ -55,6 +53,14 @@ class Game {
       }
     }
     this.checkEndGame();
+  }
+
+  checkEndGame() {
+    if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
+      this.endGame = 'player1';
+    } else if (this.player2.hand.length === 0 && this.player1.hand.length > 0) {
+      this.endGame = 'player2';
+    }
   }
 
   slapCard(player) {
@@ -114,14 +120,6 @@ class Game {
       this.player1.hand.push(player.hand[0])
     }
     player.hand.shift()
-  }
-
-  checkEndGame() {
-    if (this.player1.hand.length === 0 && this.player2.hand.length > 0) {
-      this.endGame = 'player1';
-    } else if (this.player2.hand.length === 0 && this.player1.hand.length > 0) {
-      this.endGame = 'player2';
-    }
   }
 
   slapBackIn(currentLoser) {
