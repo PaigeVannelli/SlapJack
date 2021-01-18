@@ -10,6 +10,7 @@ function setUpGame() {
   currentGame = new Game()
   currentGame.shuffle(currentGame.cards);
   currentGame.deal();
+  resetDisplay();
 }
 
 function playCards(event) {
@@ -19,17 +20,14 @@ function playCards(event) {
   } else if (event.key === 'p' && !currentGame.checkPlayerTurn() && !currentGame.gameOver) {
     currentGame.addToCenter(currentGame.player2);
     displayCards();
-  } else if (event.key === 'f') {
+  } else if (event.key === 'f' && !currentGame.gameOver) {
     currentGame.slapCard(currentGame.player1);
-    showSlapDisplay(currentGame.player1)
-  } else if (event.key === 'j') {
+    showSlapDisplay()
+  } else if (event.key === 'j' && !currentGame.gameOver) {
     currentGame.slapCard(currentGame.player2);
-    showSlapDisplay(currentGame.player2)
+    showSlapDisplay()
   } else if (event.key === 'Enter' && currentGame.gameOver) {
-    console.log("enter is working ")
     setUpGame();
-    resetDisplay();
-    console.log(currentGame)
   }
 }
 
@@ -39,37 +37,43 @@ function displayCards() {
 }
 
 function displayCenterCard() {
-  var centerCard = document.getElementById("centerCardDisplay")
   if (currentGame.centerPile.length > 0) {
-   centerCard.src = `./assets/${currentGame.centerPile[0]}.png`
-   centerCard.classList.remove("invisible")
-   } else {
-    centerCard.classList.add("invisible")
-   }
+   document.getElementById("centerCardDisplay").src = `./assets/${currentGame.centerPile[0]}.png`
+   makeInvisible("centerCardDisplay", false)
+  } else {
+    makeInvisible("centerCardDisplay", true)
+  }
 }
 
 function hideEmptyDeck() {
   if (currentGame.player1.hand.length === 0) {
-    document.getElementById("player1Cards").classList.add("invisible")
+    makeInvisible("player1Cards", true)
   } else {
-    document.getElementById("player1Cards").classList.remove("invisible")
+    makeInvisible("player1Cards", false)
   }
   if (currentGame.player2.hand.length === 0) {
-    document.getElementById("player2Cards").classList.add("invisible")
+    makeInvisible("player2Cards", true)
   } else {
-    document.getElementById("player2Cards").classList.remove("invisible")
+    makeInvisible("player2Cards", false)
   }
 }
 
-function showSlapDisplay(player) {
-  clearCenterCard(player);
+function showSlapDisplay() {
+  clearCenterCard();
+  displayWinMessage();
   displayPlayerWins();
   showPlayerDeck()
 }
 
-function clearCenterCard(player) {
+function clearCenterCard() {
+  if (currentGame.centerPile.length === 0) {
+    makeInvisible("centerCardDisplay", true);
+    document.getElementById("centerCardDisplay").src = ''
+  }
+}
+
+function displayWinMessage() {
   document.getElementById("winMessage").innerText = currentGame.message;
-  document.getElementById("centerCardDisplay").classList.add("invisible")
   hideMessage()
 }
 
@@ -85,27 +89,30 @@ function displayPlayerWins() {
 }
 
 function showPlayerDeck() {
-  if (currentGame.player1.hand.length > 0) {
-    document.getElementById("player1Cards").classList.remove("invisible")
+  if (currentGame.player1.hand.length) {
+    makeInvisible("player1Cards", false);
   }
-  if (currentGame.player2.hand.length > 0)
-  document.getElementById("player2Cards").classList.remove("invisible")
+  if (currentGame.player2.hand.length) {
+    makeInvisible("player2Cards", false);
+  }
 }
 
 function resetDisplay() {
-  if (currentGame.centerPile.length === 0) {
-    document.getElementById("centerCardDisplay").classList.add("invisible");
+    makeInvisible("centerCardDisplay", true)
+    makeInvisible("player1Cards", false)
+    makeInvisible("player2Cards", false)
+}
+
+function makeInvisible(element, isInvisible) {
+  if (isInvisible) {
+    document.getElementById(element).classList.add("invisible");
+  } else {
+    document.getElementById(element).classList.remove("invisible");
   }
-  if (currentGame.player1.hand.length > 0) {
-    document.getElementById("player1Cards").classList.remove("invisible")
-  }
-  if (currentGame.player2.hand.length > 0)
-  document.getElementById("player2Cards").classList.remove("invisible")
 }
 
 // BUGS
 // Wins aren't saving - I'm reseting game - Can I just use local storage?
-// Fix old card flashing on screen after slap
 // Add shadows to cards and change shadow upon plays
 // change color pallet
 // message - press enter to reset
