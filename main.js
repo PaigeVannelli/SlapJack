@@ -107,4 +107,5 @@ function resetDisplay() {
 // Wins aren't saving - I'm reseting game - Can I just use local storage?
 // Fix old card flashing on screen after slap
 // Add shadows to cards and change shadow upon plays
-// change color pallet 
+// change color pallet
+// message - press enter to reset
