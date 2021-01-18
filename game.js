@@ -106,12 +106,14 @@ class Game {
           this.endGame = false
         } else if (player === currentWinner) {
           currentWinner.wins++;
+          currentWinner.saveWinsToStorage()
           this.message = `${currentWinner.id} wins!! Press enter for new game`;
           this.reset();
         }
       } else {
         if (player === currentLoser) {
           currentWinner.wins++;
+          currentWinner.saveWinsToStorage();
           this.message = `${currentWinner.id} wins!! Press enter for new game`;
           this.reset();
         } else if (player === currentWinner) {

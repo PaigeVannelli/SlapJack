@@ -11,6 +11,7 @@ function setUpGame() {
   currentGame.shuffle(currentGame.cards);
   currentGame.deal();
   resetDisplay();
+  displayPlayerWins();
 }
 
 function playCards(event) {
@@ -84,8 +85,10 @@ function hideMessage() {
 }
 
 function displayPlayerWins() {
-  document.getElementById("player1Wins").innerText = `${currentGame.player1.wins} wins`
-  document.getElementById("player2Wins").innerText = `${currentGame.player2.wins} wins`
+  var player1Wins = JSON.parse(localStorage.getItem('Player 1 wins'))
+  var player2Wins = JSON.parse(localStorage.getItem('Player 2 wins'))
+  document.getElementById("player1Wins").innerText = `${player1Wins || 0} wins`
+  document.getElementById("player2Wins").innerText = `${player2Wins || 0} wins`
 }
 
 function showPlayerDeck() {
