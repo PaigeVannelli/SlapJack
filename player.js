@@ -1,11 +1,10 @@
 class Player {
   constructor(id) {
-    this.id = id;
-    this.name = "Player " + id
+    this.id = "Player " + id;
     this.wins = 0;
     this.hand = [];
-
   }
+
   playCard() {
     if (this.hand.length > 0) {
       currentGame.centerPile.unshift(this.hand[0]);

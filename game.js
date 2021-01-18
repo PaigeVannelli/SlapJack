@@ -75,24 +75,24 @@ class Game {
      console.log("Jack")
      this.winPile(player)
      // this.message = "JACK"
-     this.message = `JACK! ${player.name} takes the pile`
+     this.message = `JACK! ${player.id} takes the pile`
      console.log("player 1 turn", this.player1Turn)
    } else if (this.centerPile.length > 1 && this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
      console.log("Double")
      this.winPile(player)
      // this.message = "DOUBLE"
-     this.message = `DOUBLE! ${player.name} takes the pile`
+     this.message = `DOUBLE! ${player.id} takes the pile`
      console.log("player 1 turn", this.player1Turn)
    } else if (this.centerPile.length > 2 && this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
      console.log("Sandwich")
      this.winPile(player)
      // this.message = "SANDWICH"
-     this.message = `SANDWICH! ${player.name} takes the pile`
+     this.message = `SANDWICH! ${player.id} takes the pile`
      console.log("player 1 turn", this.player1Turn)
    } else {
      console.log("Bad Slap")
      this.loseCard(player)
-     this.message = `BAD SLAP! ${player.name} loses a card.`
+     this.message = `BAD SLAP! ${player.id} loses a card.`
      console.log("player 1 turn", this.player1Turn)
    }
   }
@@ -102,19 +102,21 @@ class Game {
       if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
         if (player === currentLoser) {
           this.winPile(currentLoser)
+          this.message = `BAD SLAP! ${currentLoser.id} takes the pile.`
           this.endGame = false
         } else if (player === currentWinner) {
-          currentWinner.wins++
-          this.message = `${currentWinner.name} wins!!`
-          this.reset()
+          currentWinner.wins++;
+          this.message = `${currentWinner.id} wins!! Press enter for new game`;
+          this.reset();
         }
       } else {
         if (player === currentLoser) {
-          currentWinner.wins++
-          this.message = `${currentWinner.name} wins!!`
-          this.reset()
+          currentWinner.wins++;
+          this.message = `${currentWinner.id} wins!! Press enter for new game`;
+          this.reset();
         } else if (player === currentWinner) {
           this.winPile(currentLoser);
+          this.message = `BAD SLAP! ${currentLoser.id} takes the pile.`
           this.endGame = false
         }
       }
@@ -124,12 +126,11 @@ class Game {
   }
 
   winPile(player) {
-    var wonCards = this.shuffle(this.centerPile)
-    for (var i = 0; i < wonCards.length; i++) {
-      player.hand.push(wonCards[i])
+    for (var i = 0; i < this.centerPile.length; i++) {
+      player.hand.push(this.centerPile[i])
     }
+    this.shuffle(player.hand)
     this.centerPile = [];
-    // console.log(this.player1.hand, this.player2.hand)
   }
 
   loseCard(player) {
@@ -143,6 +144,5 @@ class Game {
 
   reset() {
     this.gameOver = true;
-    console.log(this.gameOver)
   }
 }
