@@ -1,10 +1,14 @@
+ // ~~~~~~~~~~~~~ VARIABLES ~~~~~~~~~~~~~ //
+
+var currentGame
+
  // ~~~~~~~~~~~ EVENT LISTENERS~~~~~~~~~ //
+
 window.addEventListener("load", setUpGame)
 
 window.addEventListener("keydown", playCards)
 
 // ~~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~~~~~ //
-var currentGame
 
 function setUpGame() {
   currentGame = new Game()
@@ -17,10 +21,10 @@ function setUpGame() {
 function playCards(event) {
   if (event.key === 'q' && currentGame.checkPlayerTurn() && !currentGame.gameOver) {
     currentGame.addToCenter(currentGame.player1);
-    displayCards();
+    displayCards('player1');
   } else if (event.key === 'p' && !currentGame.checkPlayerTurn() && !currentGame.gameOver) {
     currentGame.addToCenter(currentGame.player2);
-    displayCards();
+    displayCards('player2');
   } else if (event.key === 'f' && !currentGame.gameOver) {
     currentGame.slapCard(currentGame.player1);
     showSlapDisplay()
@@ -32,17 +36,26 @@ function playCards(event) {
   }
 }
 
-function displayCards() {
-  displayCenterCard();
+function displayCards(player) {
+  displayCenterCard(player);
   hideEmptyDeck();
 }
 
-function displayCenterCard() {
+function displayCenterCard(player) {
   if (currentGame.centerPile.length > 0) {
-   document.getElementById("centerCardDisplay").src = `./assets/${currentGame.centerPile[0]}.png`
-   makeInvisible("centerCardDisplay", false)
+    document.getElementById("centerCardDisplay").src = `./assets/${currentGame.centerPile[0]}.png`;
+    alternateShadow(player);
+    makeInvisible("centerCardDisplay", false)
   } else {
     makeInvisible("centerCardDisplay", true)
+  }
+}
+
+function alternateShadow(player) {
+  if (player === 'player1') {
+    document.getElementById("centerCardDisplay").classList.remove('player2-shadow')
+  } else {
+    document.getElementById("centerCardDisplay").classList.add('player2-shadow')
   }
 }
 
@@ -74,8 +87,12 @@ function clearCenterCard() {
 }
 
 function displayWinMessage() {
-  document.getElementById("winMessage").innerText = currentGame.message;
-  hideMessage()
+  if (!currentGame.message.includes("wins")) {
+    document.getElementById("winMessage").innerText = currentGame.message;
+    hideMessage()
+  } else {
+    document.getElementById("winMessage").innerText = currentGame.message;
+  }
 }
 
 function hideMessage() {
@@ -104,6 +121,7 @@ function resetDisplay() {
     makeInvisible("centerCardDisplay", true)
     makeInvisible("player1Cards", false)
     makeInvisible("player2Cards", false)
+    document.getElementById("winMessage").innerText = ""
 }
 
 function makeInvisible(element, isInvisible) {
@@ -113,8 +131,3 @@ function makeInvisible(element, isInvisible) {
     document.getElementById(element).classList.remove("invisible");
   }
 }
-
-// BUGS
-// Add shadows to cards and change shadow upon plays
-// bad slap shortly after is dasappearing too fast
-// add timeout to every slap message!

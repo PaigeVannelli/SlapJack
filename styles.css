@@ -9,9 +9,8 @@
 }
 
 body {
-  background-color: #7395AE;
+  background-color: #77a8a8;
   background-image: url("https://www.cssdesignawards.com/articleimages/2014/20140826/13-infiniteCss.jpg");
-  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBuQOxExxcaMB5VF1pWua96jyd6r1CeFeGUw&usqp=CAU"); */
   background-repeat: no-repeat;
   background-size: 92%;
   background-position: 50% -15%;
@@ -38,7 +37,7 @@ header {
   align-self: center;
   text-align: center;
   height: 1.5em;
-  color: #7395AE;
+  color: #77a8a8;
 }
 
 .all-cards {
@@ -62,6 +61,7 @@ header {
   margin-top: 8em;
   border-radius: 10px;
   box-shadow: 0 0 13px;
+  box-shadow: 0 0 30px #787878;
 }
 
 .player-cards {
@@ -72,11 +72,11 @@ header {
 }
 
 .player1-card {
-  box-shadow: 0 0 20px #7395AE;
+  box-shadow: 0 0 30px #787878;
 }
 
-.player2-card {
-  box-shadow: 0 0 20px #7395AE;
+.player2-shadow {
+  box-shadow: 0 0 30px #77a8a8;
 }
 
 .center-card-image {
