@@ -15,13 +15,9 @@ class Game {
     var cardsLength = cards.length
     while (cardsLength) {
       var randomIndex = Math.floor(Math.random() * cardsLength--);
-      //getting a random index number based on array length
       var lastCard = cards[cardsLength];
-      //getting the 52nd card in the array
       cards[cardsLength] = cards[randomIndex];
-      // last element in the deck is now in a random spot
       cards[randomIndex] = lastCard;
-      //placeholder is our last card in the array
     }
     return cards
   }
@@ -124,7 +120,7 @@ class Game {
 
   slapBackIn(currentLoser) {
     this.winPile(currentLoser)
-    this.message = `BAD SLAP! ${currentLoser.id} takes the pile.`
+    this.message = `JACK! ${currentLoser.id} takes the pile.`
     this.endGame = false
   }
 

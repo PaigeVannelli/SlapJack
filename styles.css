@@ -9,7 +9,6 @@
 }
 
 body {
-  /* background-color: #7395AE; */
   background-color: #77a8a8;
   background-image: url("https://www.cssdesignawards.com/articleimages/2014/20140826/13-infiniteCss.jpg");
   background-repeat: no-repeat;
@@ -38,7 +37,6 @@ header {
   align-self: center;
   text-align: center;
   height: 1.5em;
-  /* color: #7395AE; */
   color: #77a8a8;
 }
 
@@ -75,10 +73,6 @@ header {
 
 .player1-card {
   box-shadow: 0 0 30px #787878;
-}
-
-.player2-card {
-  box-shadow: 0 0 30px #77a8a8;
 }
 
 .player2-shadow {

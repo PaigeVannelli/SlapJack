@@ -1,10 +1,14 @@
+ // ~~~~~~~~~~~~~ VARIABLES ~~~~~~~~~~~~~ //
+
+var currentGame
+
  // ~~~~~~~~~~~ EVENT LISTENERS~~~~~~~~~ //
+
 window.addEventListener("load", setUpGame)
 
 window.addEventListener("keydown", playCards)
 
 // ~~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~~~~~ //
-var currentGame
 
 function setUpGame() {
   currentGame = new Game()
@@ -83,8 +87,12 @@ function clearCenterCard() {
 }
 
 function displayWinMessage() {
-  document.getElementById("winMessage").innerText = currentGame.message;
-  hideMessage()
+  if (!currentGame.message.includes("wins")) {
+    document.getElementById("winMessage").innerText = currentGame.message;
+    hideMessage()
+  } else {
+    document.getElementById("winMessage").innerText = currentGame.message;
+  }
 }
 
 function hideMessage() {
@@ -113,6 +121,7 @@ function resetDisplay() {
     makeInvisible("centerCardDisplay", true)
     makeInvisible("player1Cards", false)
     makeInvisible("player2Cards", false)
+    document.getElementById("winMessage").innerText = ""
 }
 
 function makeInvisible(element, isInvisible) {
@@ -122,8 +131,3 @@ function makeInvisible(element, isInvisible) {
     document.getElementById(element).classList.remove("invisible");
   }
 }
-
-// BUGS
-// Add shadows to cards and change shadow upon plays
-// bad slap shortly after is dasappearing too fast
-// add timeout to every slap message!
