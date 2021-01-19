@@ -54,7 +54,9 @@ function displayCenterCard(player) {
 function alternateShadow(player) {
   if (player === 'player1') {
     document.getElementById("centerCardDisplay").classList.remove('player2-shadow')
+    document.getElementById("centerCardDisplay").classList.add('player1-shadow')
   } else {
+    document.getElementById("centerCardDisplay").classList.remove('player1-shadow')
     document.getElementById("centerCardDisplay").classList.add('player2-shadow')
   }
 }

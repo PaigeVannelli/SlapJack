@@ -71,8 +71,8 @@ header {
   background-position: center;
 }
 
-.player1-card {
-  box-shadow: 0 0 30px #787878;
+.player1-shadow {
+  box-shadow: 0 0 30px #4682B4;
 }
 
 .player2-shadow {
