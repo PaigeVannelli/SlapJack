@@ -127,7 +127,7 @@ class Game {
   winGame(currentWinner) {
     currentWinner.wins++;
     currentWinner.saveWinsToStorage();
-    this.message = `${currentWinner.id} wins!! Press enter for new game`;
+    this.message = `${currentWinner.id} wins! Press enter for new game`;
     this.reset();
   }
 
