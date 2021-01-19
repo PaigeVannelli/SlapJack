@@ -10,6 +10,8 @@ window.addEventListener("keydown", playCards)
 
 // ~~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~~~~~ //
 
+// $('h2').css("border", "3px solid blue", "border-radius", "40%")
+
 function setUpGame() {
   currentGame = new Game()
   currentGame.shuffle(currentGame.cards);
@@ -43,21 +45,25 @@ function displayCards(player) {
 
 function displayCenterCard(player) {
   if (currentGame.centerPile.length > 0) {
-    document.getElementById("centerCardDisplay").src = `./assets/${currentGame.centerPile[0]}.png`;
+    // document.getElementById("centerCardDisplay").src = `./assets/${currentGame.centerPile[0]}.png`;
+    $(".center-card-image").attr("src", `./assets/${currentGame.centerPile[0]}.png`)
     alternateShadow(player);
     makeInvisible("centerCardDisplay", false)
   } else {
     makeInvisible("centerCardDisplay", true)
+    $(".center-card").css("box-shadow", "0 0 30px #787878")
   }
 }
 
 function alternateShadow(player) {
   if (player === 'player1') {
-    document.getElementById("centerCardDisplay").classList.remove('player2-shadow')
-    document.getElementById("centerCardDisplay").classList.add('player1-shadow')
+    // document.getElementById("centerCardDisplay").classList.remove('player2-shadow')
+    $(".center-card").css("box-shadow", "0 0 30px #4682B4")
+    // document.getElementById("centerCardDisplay").classList.add('player1-shadow')
   } else {
-    document.getElementById("centerCardDisplay").classList.remove('player1-shadow')
-    document.getElementById("centerCardDisplay").classList.add('player2-shadow')
+    $(".center-card").css("box-shadow", "0 0 30px #77a8a8")
+    // document.getElementById("centerCardDisplay").classList.remove('player1-shadow')
+    // document.getElementById("centerCardDisplay").classList.add('player2-shadow')
   }
 }
 
@@ -84,30 +90,33 @@ function showSlapDisplay() {
 function clearCenterCard() {
   if (currentGame.centerPile.length === 0) {
     makeInvisible("centerCardDisplay", true);
-    document.getElementById("centerCardDisplay").src = ''
+    // document.getElementById("centerCardDisplay").src = ''
+    $('#centerCardDisplay').attr('src', '')
   }
 }
 
 function displayWinMessage() {
+  $('h1').text(`${currentGame.message}`)
+  // document.getElementById("winMessage").innerText = currentGame.message;
   if (!currentGame.message.includes("wins")) {
-    document.getElementById("winMessage").innerText = currentGame.message;
     hideMessage()
-  } else {
-    document.getElementById("winMessage").innerText = currentGame.message;
   }
 }
 
 function hideMessage() {
   setTimeout(function() {
-    document.getElementById("winMessage").innerText = ""
+    // document.getElementById("winMessage").innerText = ""
+    $('h1').text('')
   }, 2000);
 }
 
 function displayPlayerWins() {
   var player1Wins = JSON.parse(localStorage.getItem('Player 1 wins'))
   var player2Wins = JSON.parse(localStorage.getItem('Player 2 wins'))
-  document.getElementById("player1Wins").innerText = `${player1Wins || 0} wins`
-  document.getElementById("player2Wins").innerText = `${player2Wins || 0} wins`
+  // document.getElementById("player1Wins").innerText = `${player1Wins || 0} wins`
+  $('#player1Wins').text(`${player1Wins || 0} wins`)
+  // document.getElementById("player2Wins").innerText = `${player2Wins || 0} wins`
+  $('#player2Wins').text(`${player2Wins || 0} wins`)
 }
 
 function showPlayerDeck() {
@@ -123,13 +132,16 @@ function resetDisplay() {
     makeInvisible("centerCardDisplay", true)
     makeInvisible("player1Cards", false)
     makeInvisible("player2Cards", false)
-    document.getElementById("winMessage").innerText = ""
+    // document.getElementById("winMessage").innerText = ""
+    $('h1').text('')
 }
 
 function makeInvisible(element, isInvisible) {
   if (isInvisible) {
-    document.getElementById(element).classList.add("invisible");
+    // document.getElementById(element).classList.add("invisible");
+    $(`#${element}`).addClass("invisible");
   } else {
-    document.getElementById(element).classList.remove("invisible");
+    // document.getElementById(element).classList.remove("invisible");
+    $(`#${element}`).removeClass("invisible");
   }
 }

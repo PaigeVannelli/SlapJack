@@ -22,6 +22,10 @@ body {
   justify-content: center;
 }
 
+.red {
+  background-color: red;
+}
+
 /* ~~~~~~~~~~~ SECTIONS ~~~~~~~~ */
 
 header {
