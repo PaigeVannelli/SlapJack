@@ -62,34 +62,34 @@ class Game {
 
   slapCard(player) {
     if (!this.endGame) {
-      this.normalPlay(player)
+      this.regularSlap(player)
     } else if (this.endGame === "player1") {
-      this.endGamePlay(player, this.player1, this.player2);
+      this.endGameSlap(player, this.player1, this.player2);
     } else if (this.endGame === "player2") {
-      this.endGamePlay(player, this.player2, this.player1);
+      this.endGameSlap(player, this.player2, this.player1);
     }
   }
 
- normalPlay(player) {
+ regularSlap(player) {
    if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
-     this.winPile(player)
-     this.message = `JACK! ${player.id} takes the pile`;
-     this.delaySlap();
+     this.winSlap(player, 'JACK')
    } else if (this.centerPile.length > 1 && this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
-     this.winPile(player)
-     this.message = `DOUBLE! ${player.id} takes the pile`;
-     this.delaySlap();
+     this.winSlap(player, 'DOUBLE')
    } else if (this.centerPile.length > 2 && this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
-     this.winPile(player)
-     this.message = `SANDWICH! ${player.id} takes the pile`;
-     this.delaySlap();
+     this.winSlap(player, 'SANDWICH')
    } else {
      this.loseCard(player)
      this.message = `BAD SLAP! ${player.id} loses a card.`
    }
   }
 
-  endGamePlay(player, currentLoser, currentWinner) {
+  winSlap(player, typeOfWin) {
+    this.winPile(player)
+    this.message = `${typeOfWin}! ${player.id} takes the pile`;
+    this.delaySlap();
+  }
+
+  endGameSlap(player, currentLoser, currentWinner) {
     if (this.centerPile[0].includes("jack")) {
       if (player === currentLoser) {
         this.slapBackIn(currentLoser)
@@ -124,7 +124,7 @@ class Game {
 
   delaySlap() {
     this.canSlap = false;
-    setTimeout(this.allowSlap.bind(this), 2000);
+    setTimeout(this.allowSlap.bind(this), 700);
   }
 
   allowSlap() {
@@ -136,6 +136,7 @@ class Game {
     this.winPile(currentLoser)
     this.message = `JACK! ${currentLoser.id} takes the pile.`
     this.endGame = false
+    this.delaySlap();
   }
 
   winGame(currentWinner) {
