@@ -1,6 +1,7 @@
  // ~~~~~~~~~~~~~ VARIABLES ~~~~~~~~~~~~~ //
 
 var currentGame
+// var canSlap = true;
 
  // ~~~~~~~~~~~ EVENT LISTENERS~~~~~~~~~ //
 
@@ -26,11 +27,22 @@ function playCards(event) {
     currentGame.addToCenter(currentGame.player2);
     displayCards('player2');
   } else if (event.key === 'f' && !currentGame.gameOver) {
-    currentGame.slapCard(currentGame.player1);
-    showSlapDisplay()
+    if (currentGame.canSlap) {
+      currentGame.slapCard(currentGame.player1);
+      showSlapDisplay()
+      // canSlap = false;
+      // delaySlap()
+    }
   } else if (event.key === 'j' && !currentGame.gameOver) {
-    currentGame.slapCard(currentGame.player2);
-    showSlapDisplay()
+    if (currentGame.canSlap) {
+      currentGame.slapCard(currentGame.player2);
+      showSlapDisplay()
+      // canSlap = false;
+      // delaySlap()
+    }
+    // currentGame.slapCard(currentGame.player2);
+    // showSlapDisplay()
+    // delaySlap(event)
   } else if (event.key === 'Enter' && currentGame.gameOver) {
     setUpGame();
   }
@@ -125,6 +137,13 @@ function resetDisplay() {
     makeInvisible("player2Cards", false)
     document.getElementById("winMessage").innerText = ""
 }
+
+// function delaySlap() {
+//   setTimeout(function() {
+//     canSlap = true
+//     console.log(canSlap)
+//   }, 2000);
+// }
 
 function makeInvisible(element, isInvisible) {
   if (isInvisible) {

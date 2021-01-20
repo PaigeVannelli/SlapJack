@@ -6,6 +6,7 @@ class Game {
     this.shuffledDeck = []
     this.centerPile = [];
     this.player1Turn = true;
+    this.canSlap = true;
     this.message = ""
     this.endGame = false;
     this.gameOver = false;
@@ -72,13 +73,16 @@ class Game {
  normalPlay(player) {
    if (this.centerPile.length > 0 && this.centerPile[0].includes("jack")) {
      this.winPile(player)
-     this.message = `JACK! ${player.id} takes the pile`
+     this.message = `JACK! ${player.id} takes the pile`;
+     this.delaySlap();
    } else if (this.centerPile.length > 1 && this.centerPile[0].slice(-2) === this.centerPile[1].slice(-2)) {
      this.winPile(player)
-     this.message = `DOUBLE! ${player.id} takes the pile`
+     this.message = `DOUBLE! ${player.id} takes the pile`;
+     this.delaySlap();
    } else if (this.centerPile.length > 2 && this.centerPile[0].slice(-2) === this.centerPile[2].slice(-2)) {
      this.winPile(player)
-     this.message = `SANDWICH! ${player.id} takes the pile`
+     this.message = `SANDWICH! ${player.id} takes the pile`;
+     this.delaySlap();
    } else {
      this.loseCard(player)
      this.message = `BAD SLAP! ${player.id} loses a card.`
@@ -116,6 +120,16 @@ class Game {
       this.player1.hand.push(player.hand[0])
     }
     player.hand.shift()
+  }
+
+  delaySlap() {
+    this.canSlap = false;
+    setTimeout(this.allowSlap.bind(this), 2000);
+  }
+
+  allowSlap() {
+    this.canSlap = true;
+    console.log(this)
   }
 
   slapBackIn(currentLoser) {
