@@ -25,10 +25,10 @@ function playCards(event) {
   } else if (event.key === 'p' && !currentGame.checkPlayerTurn() && !currentGame.gameOver) {
     currentGame.addToCenter(currentGame.player2);
     displayCards('player2');
-  } else if (event.key === 'f' && !currentGame.gameOver) {
+  } else if (event.key === 'f' && !currentGame.gameOver && currentGame.canSlap) {
     currentGame.slapCard(currentGame.player1);
     showSlapDisplay()
-  } else if (event.key === 'j' && !currentGame.gameOver) {
+  } else if (event.key === 'j' && !currentGame.gameOver && currentGame.canSlap) {
     currentGame.slapCard(currentGame.player2);
     showSlapDisplay()
   } else if (event.key === 'Enter' && currentGame.gameOver) {
